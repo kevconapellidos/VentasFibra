@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        form { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        input, textarea { width: 100%; padding: 8px; margin: 5px 0; }
+        button { background-color: #28a745; color: white; padding: 10px; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h2>Formulario de Registro</h2>
+    <form id="miFormulario">
+        <input type="text" id="nombre" placeholder="Nombre" required><br>
+        <input type="email" id="correo" placeholder="Correo electrónico" required><br>
+        <textarea id="mensaje" placeholder="Escribe tu mensaje" required></textarea><br>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <p id="respuesta"></p>
+
+    <script>
+        document.getElementById("miFormulario").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            var data = {
+                nombre: document.getElementById("nombre").value,
+                correo: document.getElementById("correo").value,
+                mensaje: document.getElementById("mensaje").value
+            };
+
+            fetch("https://script.google.com/macros/s/AKfycbwcT43o6yxYgTlY-jhNkXx20lWiVhXteN6b6gpMT6y2zIgIA91SxoJZLdKJP5q6d-ho2w/exec", {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            }).then(() => {
+                document.getElementById("respuesta").innerText = "Datos enviados con éxito";
+                document.getElementById("miFormulario").reset();
+            }).catch(error => {
+                document.getElementById("respuesta").innerText = "Error al enviar los datos";
+            });
+        });
+    </script>
+
+</body>
+</html>

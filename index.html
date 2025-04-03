@@ -3,49 +3,300 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Registro</title>
+    <title>Registro de Ventas Outbound</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        form { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
-        input, textarea { width: 100%; padding: 8px; margin: 5px 0; }
-        button { background-color: #28a745; color: white; padding: 10px; border: none; cursor: pointer; }
+        body {
+            font-family: Barlow, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1000px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .form-grid {
+    		display: grid;
+    		grid-template-columns: repeat(3, 1fr);
+    		gap: 15px; /* Espaciado entre filas y columnas */
+   		 column-gap: 25px; /* Aumenta el espacio entre columnas */
+	}
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+    		width: 100%;
+   		padding: 10px;
+    		border: 1px solid #ccc;
+    		border-radius: 5px;
+    		font-size: 15px; /* Unifica el tamaño del texto */
+    		height: 40px; /* Asegura una altura uniforme */
+    		box-sizing: border-box; /* Evita que el padding afecte el tamaño total */
+	}
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px; /* Espaciado entre los botones */
+            margin-top: 20px;
+        }
+
+        button {
+            font-family: 'Barlow', sans-serif;
+            font-size: 17px;
+            padding: 10px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            width: 150px; /* Asegura un tamaño uniforme */
+        }
+
+        #enviarBtn {
+    		background-color: #00EEB0;
+    		color: black;
+    		font-weight: bold;
+	}
+
+        #enviarBtn:hover {
+            background-color: #00CC97;
+        }
+
+        #limpiarBtn {
+            background-color: #FF0000;
+            color: white;
+        }
+
+        #limpiarBtn:hover {
+            background-color: #c82333;
+        }
+
+        @media (max-width: 800px) {
+            .form-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
+
 </head>
 <body>
 
-    <h2>Formulario de Registro</h2>
-    <form id="miFormulario">
-        <input type="text" id="nombre" placeholder="Nombre" required><br>
-        <input type="email" id="correo" placeholder="Correo electrónico" required><br>
-        <textarea id="mensaje" placeholder="Escribe tu mensaje" required></textarea><br>
-        <button type="submit">Enviar</button>
-    </form>
+    <h2>Registro de Ventas Outbound</h2>
 
-    <p id="respuesta"></p>
+    <div class="container">
+        <form id="salesForm">
+            <div class="form-grid">
+                <div>
+                    <label>Fecha de Venta:</label>
+                    <input type="date" id="FechaVenta" required>
+                </div>
 
-    <script>
-        document.getElementById("miFormulario").addEventListener("submit", function(event) {
-            event.preventDefault();
+                <div>
+                    <label>DNI:</label>
+                    <input type="text" id="DNI" placeholder="Ej: 12345678" required>
+                </div>
 
-            var data = {
-                nombre: document.getElementById("nombre").value,
-                correo: document.getElementById("correo").value,
-                mensaje: document.getElementById("mensaje").value
-            };
+                <div>
+                    <label>Nombre Ejecutivo:</label>
+                    <input type="text" id="NombreEjecutivo" placeholder="Ej: Juan Perez" required>
+                </div>
 
-            fetch("https://script.google.com/macros/s/AKfycbwcT43o6yxYgTlY-jhNkXx20lWiVhXteN6b6gpMT6y2zIgIA91SxoJZLdKJP5q6d-ho2w/exec", {
-                method: "POST",
-                mode: "no-cors",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-            }).then(() => {
-                document.getElementById("respuesta").innerText = "Datos enviados con éxito";
-                document.getElementById("miFormulario").reset();
-            }).catch(error => {
-                document.getElementById("respuesta").innerText = "Error al enviar los datos";
-            });
+                <div>
+                    <label>Usuario OneTouch:</label>
+                    <input type="text" id="UsuarioOneTouch" placeholder="Usuario AAP_" required>
+                </div>
+
+                <div>
+                    <label>RUT Cliente:</label>
+                    <input type="text" id="RUTCliente" placeholder="Ej: 12345678-9" required>
+                </div>
+
+                <div>
+                    <label>Numero de Negocio:</label>
+                    <input type="text" id="NumNegocio" placeholder="Numero de negocio" required>
+                </div>
+
+                <div>
+                    <label>Movil 1:</label>
+                    <input type="text" id="Movil1" placeholder="Ej: 56912345678" required>
+                </div>
+
+                <div>
+                    <label>Movil 2:</label>
+                    <input type="text" id="Movil2" placeholder="Opcional">
+                </div>
+
+                <div>
+                    <label>Habilidad:</label>
+                    <select id="Habilidad" required>
+			<option value="" disabled selected>Selecciona tu opción</option>
+                        <option value="FibraClientes">Fibra Clientes</option>
+                        <option value="Fibra NoClientes">Fibra No Clientes</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Producto:</label>
+                    <select id="Producto" required>
+			<option value="" disabled selected>Selecciona tu opción</option>
+                        <option value="Fibra">Fibra</option>
+                        <option value="Movil">Móvil</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Plan Tarifario:</label>
+                    <select id="PlanTarifario" required>
+			<option value="" disabled selected>Selecciona tu opción</option>
+                        <option value="Internet 600">Internet 600</option>
+                        <option value="Internet 800">Internet 800</option>
+                        <option value="Internet 940">Internet 940</option>
+
+                        <option value="TVFull 600">TVFull 600</option>
+                        <option value="TVFull 800">TVFull 800</option>
+                        <option value="TVFull 940">TVFull 940</option>
+
+                        <option value="TVLite 600">TVLite 600</option>
+                        <option value="TVLite 800">TVLite 800</option>
+                        <option value="TVLite 940">TVLite 940</option>
+
+                        <option value="TrioFull 600">TrioFull 600</option>
+                        <option value="TrioFull 800">TrioFull 800</option>
+                        <option value="TrioFull 940">TrioFull 940</option>
+                        <option value="TrioLite 600">TrioLite 600</option>
+                        <option value="TrioLite 800">TrioLite 800</option>
+                        <option value="TrioLite 940">TrioLite 940</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Comuna:</label>
+                    <input type="text" id="Comuna" placeholder="Ej: Santiago">
+                </div>
+
+                <div>
+                    <label>Region:</label>
+                    <input type="text" id="Region" placeholder="Ej: Metropolitana de Santiago">
+                </div>
+
+                <div>
+                    <label>Nombre Cliente:</label>
+                    <input type="text" id="NombreCliente" placeholder="Ej: Pedro Gomez">
+                </div>
+
+                <div>
+                    <label>Dirección Cliente:</label>
+                    <input type="text" id="DireccionCliente" placeholder="Ej: Av. Principal 1234">
+                </div>
+
+                <div>
+                    <label>Portabilidad:</label>
+                    <select id="Portabilidad" required>
+			<option value="" disabled selected>Selecciona tu opción</option>
+                        <option value="Si">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Compañía Donadora:</label>
+                    <select id="CompaniaDonadora">
+			<option value="" disabled selected>Selecciona tu opción</option>
+                        <option value="Movistar">Movistar</option>
+                        <option value="Claro">Claro</option>
+                        <option value="Wom">Wom</option>
+                        <option value="Gtd">Gtd</option>
+                        <option value="Pacifico">Pacífico</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Fecha de Instalación:</label>
+                    <input type="date" id="FechaInstalacion">
+                </div>
+            </div>
+            <div class="button-container">
+                <button type="submit" id="enviarBtn">Enviar</button>
+                <button type="button" id="limpiarBtn">Limpiar</button>
+            </div>
+        </form>
+
+        <p id="respuesta" style="text-align: center; font-weight: bold; color: red;"></p>
+    </div>
+
+<script>
+    document.getElementById("salesForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        var data = {
+            FechaVenta: document.getElementById("FechaVenta").value,
+            DNI: document.getElementById("DNI").value,
+            NombreEjecutivo: document.getElementById("NombreEjecutivo").value,
+            UsuarioOneTouch: document.getElementById("UsuarioOneTouch").value,
+            RUTCliente: document.getElementById("RUTCliente").value,
+            NumNegocio: document.getElementById("NumNegocio").value,
+            Movil1: document.getElementById("Movil1").value,
+            Movil2: document.getElementById("Movil2").value,
+            Habilidad: document.getElementById("Habilidad").value,
+            Producto: document.getElementById("Producto").value,
+            PlanTarifario: document.getElementById("PlanTarifario").value,
+            Comuna: document.getElementById("Comuna").value,
+            Region: document.getElementById("Comuna").value,
+            NombreCliente: document.getElementById("NombreCliente").value,
+            DireccionCliente: document.getElementById("DireccionCliente").value,
+            Portabilidad: document.getElementById("Portabilidad").value,
+            CompaniaDonadora: document.getElementById("CompaniaDonadora").value,
+            FechaInstalacion: document.getElementById("FechaInstalacion").value
+        };
+
+        let scriptURL = "https://script.google.com/macros/s/AKfycbyeGhNVe1H2hrPqjAgE2_jNHot_beuk0yTHJQ1UnZdbBNbWgxvWFq0QmVJsgoDyI8XP7A/exec"; // Reemplaza con tu enlace de Google Apps Script
+
+        fetch(scriptURL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        })
+        .then(() => {
+            document.getElementById("respuesta").innerText = "Datos enviados con éxito";
+            document.getElementById("salesForm").reset();
+        })
+        .catch(error => {
+            document.getElementById("respuesta").innerText = "Error al enviar los datos";
         });
-    </script>
-
+    });
+	document.getElementById("limpiarBtn").addEventListener("click", function() {
+        document.getElementById("salesForm").reset();
+        document.getElementById("respuesta").innerText = "¡Campos Limpios!";
+        setTimeout(() => { document.getElementById("respuesta").innerText = ""; }, 3000);
+    });
+</script>
 </body>
 </html>

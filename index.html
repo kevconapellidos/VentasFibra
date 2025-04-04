@@ -133,114 +133,100 @@
                 </div>
 
                 <div>
-                    <label>RUT Cliente:</label>
-                    <input type="text" id="RUTCliente" placeholder="Ej: 12345678-9" required>
-                </div>
-
-                <div>
-                    <label>Numero de Negocio:</label>
-                    <input type="text" id="NumNegocio" placeholder="Numero de negocio" required>
-                </div>
-
-                <div>
-                    <label>Movil 1:</label>
-                    <input type="text" id="Movil1" placeholder="Ej: 56912345678" required>
-                </div>
-
-                <div>
-                    <label>Movil 2:</label>
-                    <input type="text" id="Movil2" placeholder="Opcional">
-                </div>
-
-                <div>
                     <label>Habilidad:</label>
                     <select id="Habilidad" required>
 			<option value="" disabled selected>Selecciona tu opción</option>
                         <option value="FibraClientes">Fibra Clientes</option>
                         <option value="Fibra NoClientes">Fibra No Clientes</option>
+                        <option value="Convergente">Convegente</option>
                     </select>
                 </div>
 
+		<div>
+   		 <label>Producto:</label>
+    		<select id="Producto" required>
+    		    <option value="" disabled selected>Selecciona tu opción</option>
+   		 </select>
+		</div>
+
+    
                 <div>
-                    <label>Producto:</label>
-                    <select id="Producto" required>
-			<option value="" disabled selected>Selecciona tu opción</option>
-                        <option value="Fibra">Fibra</option>
-                        <option value="Movil">Móvil</option>
-                    </select>
+                    <label>RUT Cliente:</label>
+                    <input type="text" id="RUTCliente" placeholder="Ej: 12345678-9" required>
                 </div>
 
-                <div>
-                    <label>Plan Tarifario:</label>
-                    <select id="PlanTarifario" required>
-			<option value="" disabled selected>Selecciona tu opción</option>
-                        <option value="Internet 600">Internet 600</option>
-                        <option value="Internet 800">Internet 800</option>
-                        <option value="Internet 940">Internet 940</option>
-
-                        <option value="TVFull 600">TVFull 600</option>
-                        <option value="TVFull 800">TVFull 800</option>
-                        <option value="TVFull 940">TVFull 940</option>
-
-                        <option value="TVLite 600">TVLite 600</option>
-                        <option value="TVLite 800">TVLite 800</option>
-                        <option value="TVLite 940">TVLite 940</option>
-
-                        <option value="TrioFull 600">TrioFull 600</option>
-                        <option value="TrioFull 800">TrioFull 800</option>
-                        <option value="TrioFull 940">TrioFull 940</option>
-                        <option value="TrioLite 600">TrioLite 600</option>
-                        <option value="TrioLite 800">TrioLite 800</option>
-                        <option value="TrioLite 940">TrioLite 940</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label>Comuna:</label>
-                    <input type="text" id="Comuna" placeholder="Ej: Santiago">
-                </div>
-
-                <div>
-                    <label>Region:</label>
-                    <input type="text" id="Region" placeholder="Ej: Metropolitana de Santiago">
-                </div>
-
-                <div>
+           	<div>
                     <label>Nombre Cliente:</label>
                     <input type="text" id="NombreCliente" placeholder="Ej: Pedro Gomez">
                 </div>
+
 
                 <div>
                     <label>Dirección Cliente:</label>
                     <input type="text" id="DireccionCliente" placeholder="Ej: Av. Principal 1234">
                 </div>
 
+		<div>
+    			<label>Región:</label>
+    			<select id="Region" required>
+        		<option value="" disabled selected>Selecciona una región</option>
+    			</select>
+		</div>
+
+		<div>
+    			<label>Comuna:</label>
+    			<select id="Comuna" required>
+        		<option value="" disabled selected>Selecciona una comuna</option>
+    			</select>
+		</div>
+
+
+ 		<div>
+   		 <label>Plan Tarifario:</label>
+   		 <select id="PlanTarifario" required>
+       		 <option value="" disabled selected>Selecciona tu opción</option>
+  		 </select>
+		</div>
+
                 <div>
-                    <label>Portabilidad:</label>
-                    <select id="Portabilidad" required>
-			<option value="" disabled selected>Selecciona tu opción</option>
-                        <option value="Si">Sí</option>
-                        <option value="No">No</option>
-                    </select>
+                    <label>Numero de Grabacion:</label>
+                    <input type="text" id="Movil1" placeholder="Ej: 56912345678" required>
                 </div>
 
                 <div>
-                    <label>Compañía Donadora:</label>
-                    <select id="CompaniaDonadora">
-			<option value="" disabled selected>Selecciona tu opción</option>
-                        <option value="Movistar">Movistar</option>
-                        <option value="Claro">Claro</option>
-                        <option value="Wom">Wom</option>
-                        <option value="Gtd">Gtd</option>
-                        <option value="Pacifico">Pacífico</option>
-                        <option value="Otro">Otro</option>
-                    </select>
+                    <label>Contacto Adicional:</label>
+                    <input type="text" id="Movil2" placeholder="Opcional">
                 </div>
+
+		<div>
+    			<label>Portabilidad:</label>
+   			 <select id="Portabilidad" required>
+        			<option value="" disabled selected>Selecciona tu opción</option>
+    			</select>
+		</div>
+
+		<div>
+    		<label>Compañía Donadora:</label>
+    		<select id="CompaniaDonadora" required>
+        		<option value="" disabled selected>Selecciona tu opción</option>
+    		</select>
+		</div>
+
 
                 <div>
                     <label>Fecha de Instalación:</label>
                     <input type="date" id="FechaInstalacion">
                 </div>
+
+    
+            <div>
+                    <label>Numero de Negocio:</label>
+                    <input type="text" id="NumNegocio" placeholder="Numero de negocio" required>
+                </div>
+
+
+
+
             </div>
             <div class="button-container">
                 <button type="submit" id="enviarBtn">Enviar</button>
@@ -250,6 +236,8 @@
 
         <p id="respuesta" style="text-align: center; font-weight: bold; color: red;"></p>
     </div>
+
+
 
 <script>
     document.getElementById("salesForm").addEventListener("submit", function(event) {
@@ -268,7 +256,7 @@
             Producto: document.getElementById("Producto").value,
             PlanTarifario: document.getElementById("PlanTarifario").value,
             Comuna: document.getElementById("Comuna").value,
-            Region: document.getElementById("Comuna").value,
+            Region: document.getElementById("Region").value,
             NombreCliente: document.getElementById("NombreCliente").value,
             DireccionCliente: document.getElementById("DireccionCliente").value,
             Portabilidad: document.getElementById("Portabilidad").value,
@@ -297,6 +285,303 @@
         document.getElementById("respuesta").innerText = "¡Campos Limpios!";
         setTimeout(() => { document.getElementById("respuesta").innerText = ""; }, 3000);
     });
+
+
+// Regiones y comunas de Chile
+const regionesYComunas = {
+
+    "Metropolitana de Santiago": ["Buin", "Calera De Tango", "Cerrillos", "Cerro Navia", "Colina", "Conchali", "El Bosque", "El Monte", "Estacion Central", 	"Huechuraba", "Independencia", "Isla De Maipo", "La Cisterna", "La Florida", "La Granja", "La Reina", "Lampa", "Las Condes", "Lo Barnechea", "Lo Espejo", "Lo 	Prado", "Macul", "Maipu", "Melipilla", "Nunoa", "Padre Hurtado", "Paine", "Pedro Aguirre Cerda", "Penaflor", "Penalolen", "Pirque", "Providencia", 	"Pudahuel", "Puente Alto", "Quilicura", "Quinta Normal", "Recoleta", "Renca", "San Bernardo", "San Joaquin", "San Jose De Maipo", "San Miguel", "San Ramon", 	"Santiago", "Talagante", "Vitacura"],
+
+    "Antofagasta": ["Antofagasta", "Calama", "San Pedro De Atacama", "Tocopilla"],
+    "Arica & Parinacota": ["Arica"],
+    "Atacama": ["Copiapo", "Vallenar"],
+    "Biobio": ["Arauco", "Bio Bio", "Canete", "Chiguayante", "Chillan", "Chillan Viejo", "Concepcion", "Coronel", "Florida", "Hualpen", "Hualqui", "Los Angeles", 	"Niquen", "Nuble", "Penco", "San Carlos", "San Pedro De La Paz", "Talcahuano", "Tome"],
+    "Coquimbo": ["Coquimbo", "Illapel", "La Serena", "Los Vilos", "Ovalle"],
+    "La Araucania": ["Araucania", "Lautaro", "Padre Las Casas", "Temuco", "Villarrica"],
+    "Los Rios": ["La Union", "Los Lagos", "Valdivia"],
+    "Los Lagos": ["Osorno", "Puerto Montt", "Puerto Varas"],
+    "Libertador Bernardo O'Higgins": ["Coltauco", "Graneros", "Machali", "Mostazal", "Ohiggins", "Pichilemu", "Rancagua", "Rengo", "San Fernando", "Santa Cruz"],
+    "Maule": ["Constitucion", "Curico", "Linares", "Maule", "Molina", "Parral", "San Javier", "Talca"],
+    "Tarapaca": ["Alto Hospicio", "Iquique"],
+    "Valparaiso": ["Algarrobo", "Calera", "Calle Larga", "Casablanca", "Catemu", "Concon", "El Tabo", "Hijuelas", "La Cruz", "La Ligua", "Limache", "Llaillay", "Los 	Andes", "Nogales", "Olmue", "Panquehue", "Papudo", "Quillota", "Quilpue", "Quintero", "Rinconada", "San Antonio", "San Esteban", "San Felipe", "Santa Maria", 	"Santo Domingo", "Valparaiso", "Villa Alemana", "Vina Del Mar", "Zapallar"]
+
+};
+
+// Llenar el select de regiones
+const regionSelect = document.getElementById("Region");
+const comunaSelect = document.getElementById("Comuna");
+
+for (let region in regionesYComunas) {
+    const option = document.createElement("option");
+    option.value = region;
+    option.text = region;
+    regionSelect.appendChild(option);
+}
+
+// Actualizar comunas según la región seleccionada
+regionSelect.addEventListener("change", function () {
+    const comunas = regionesYComunas[this.value] || [];
+    comunaSelect.innerHTML = '<option value="" disabled selected>Selecciona una comuna</option>'; // Reset
+
+    comunas.forEach(comuna => {
+        const option = document.createElement("option");
+        option.value = comuna;
+        option.text = comuna;
+        comunaSelect.appendChild(option);
+    });
+});
+
+
+// Opciones de Portabilidad y Compañía Donadora
+const portabilidadYCompania = {
+    "Si": ["Movistar", "Claro", "Wom", "Gtd", "Pacifico", "Otro"],
+    "No": ["-"]
+};
+
+// Llenar el select de Portabilidad
+const portabilidadSelect = document.getElementById("Portabilidad");
+const companiaDonadoraSelect = document.getElementById("CompaniaDonadora");
+
+for (let portabilidad in portabilidadYCompania) {
+    const option = document.createElement("option");
+    option.value = portabilidad;
+    option.text = portabilidad;
+    portabilidadSelect.appendChild(option);
+}
+
+// Actualizar el select de Compañía Donadora según la opción de Portabilidad
+portabilidadSelect.addEventListener("change", function () {
+    const companias = portabilidadYCompania[this.value] || [];
+    companiaDonadoraSelect.innerHTML = '<option value="" disabled selected>Selecciona tu opción</option>'; // Reset
+
+    companias.forEach(compania => {
+        const option = document.createElement("option");
+        option.value = compania;
+        option.text = compania;
+        companiaDonadoraSelect.appendChild(option);
+    });
+});
+
+
+// Opciones de Producto y sus Planes Tarifarios correspondientes
+const productoYPlanes = {
+    "Fibra": [
+        "Internet 600", "Internet 800", "Internet 940",
+        "TVFull 600", "TVFull 800", "TVFull 940",
+        "TVLite 600", "TVLite 800", "TVLite 940",
+        "TrioFull 600", "TrioFull 800", "TrioFull 940",
+        "TrioLite 600", "TrioLite 800", "TrioLite 940"
+    ],
+    "Movil": ["Portabilidad","Linea Nueva","Linea Adicional","Migracion"]
+};
+
+// Obtener los selectores
+const productoSelect = document.getElementById("Producto");
+const planTarifarioSelect = document.getElementById("PlanTarifario");
+
+// Llenar el select de Producto
+for (let producto in productoYPlanes) {
+    const option = document.createElement("option");
+    option.value = producto;
+    option.text = producto;
+    productoSelect.appendChild(option);
+}
+
+// Actualizar el select de Plan Tarifario según la opción de Producto
+productoSelect.addEventListener("change", function () {
+    const planes = productoYPlanes[this.value] || [];
+    planTarifarioSelect.innerHTML = '<option value="" disabled selected>Selecciona tu opción</option>'; // Reset
+
+    planes.forEach(plan => {
+        const option = document.createElement("option");
+        option.value = plan;
+        option.text = plan;
+        planTarifarioSelect.appendChild(option);
+    });
+});
+
+
+function bloquearEspacio(event) {
+    // Obtenemos el elemento actual
+    const element = event.target;
+
+    // Lista de IDs de los campos donde se debe bloquear la barra espaciadora
+    const camposBloqueados = [
+        'DNI',
+        'UsuarioOneTouch',
+        'RUTCliente',
+        'Movil1',
+        'Movil2',
+        'NumNegocio'
+    ];
+
+    // Si el campo actual está en la lista de campos bloqueados
+    if (camposBloqueados.includes(element.id)) {
+        // Si la tecla presionada es la barra espaciadora (código de la barra espaciadora es 32)
+        if (event.keyCode === 32) {
+            event.preventDefault(); // Prevenir el espacio
+        }
+    }
+}
+
+// Función para bloquear el pegado de espacio
+function bloquearPegarEspacio(event) {
+    const element = event.target;
+
+    // Lista de IDs de los campos donde se debe bloquear el espacio en el pegado
+    const camposBloqueados = [
+        'DNI',
+        'UsuarioOneTouch',
+        'RUTCliente',
+        'Movil1',
+        'Movil2',
+        'NumNegocio'
+    ];
+
+    // Comprobamos si el campo actual está en la lista de campos bloqueados
+    if (camposBloqueados.includes(element.id)) {
+        // Obtener el texto pegado (para pegar no solo una tecla sino cualquier cosa)
+        const textoPegar = event.clipboardData.getData('text');
+
+        // Si el texto contiene un espacio, prevenir el pegado
+        if (textoPegar.includes(' ')) {
+            event.preventDefault(); // Prevenir el pegado de espacio
+        }
+    }
+}
+
+// Añadir el event listener para la tecla de espacio en los campos especificados
+document.getElementById("DNI").addEventListener("keydown", bloquearEspacio);
+document.getElementById("UsuarioOneTouch").addEventListener("keydown", bloquearEspacio);
+document.getElementById("RUTCliente").addEventListener("keydown", bloquearEspacio);
+document.getElementById("Movil1").addEventListener("keydown", bloquearEspacio);
+document.getElementById("Movil2").addEventListener("keydown", bloquearEspacio);
+document.getElementById("NumNegocio").addEventListener("keydown", bloquearEspacio);
+
+// Añadir el event listener para el pegado de texto (paste) en los campos especificados
+document.getElementById("DNI").addEventListener("paste", bloquearPegarEspacio);
+document.getElementById("UsuarioOneTouch").addEventListener("paste", bloquearPegarEspacio);
+document.getElementById("RUTCliente").addEventListener("paste", bloquearPegarEspacio);
+document.getElementById("Movil1").addEventListener("paste", bloquearPegarEspacio);
+document.getElementById("Movil2").addEventListener("paste", bloquearPegarEspacio);
+document.getElementById("NumNegocio").addEventListener("paste", bloquearPegarEspacio);
+
+
+
+function bloquearCaracteres(event) {
+    const element = event.target;
+
+    // Lista de IDs de los campos donde se debe bloquear la barra espaciadora, coma y punto y coma
+    const camposBloqueados = [
+        'DNI',
+        'UsuarioOneTouch',
+        'RUTCliente',
+        'Movil1',
+        'Movil2',
+        'NumNegocio',
+        'NombreEjecutivo',
+        'NombreCliente',
+        'DireccionCliente'
+    ];
+
+    // Comprobamos si el campo actual está en la lista de campos bloqueados
+    if (camposBloqueados.includes(element.id)) {
+        // Bloquear la tecla de la coma (,) y el punto y coma (;)
+        if (event.keyCode === 188 || event.keyCode === 186) {
+            event.preventDefault(); // Prevenir la acción predeterminada
+        }
+    }
+}
+
+// Función para bloquear el pegado de coma y punto y coma
+function bloquearPegar(event) {
+    const element = event.target;
+
+    // Lista de IDs de los campos donde se debe bloquear la coma y punto y coma en el pegado
+    const camposBloqueados = [
+        'DNI',
+        'UsuarioOneTouch',
+        'RUTCliente',
+        'Movil1',
+        'Movil2',
+        'NumNegocio',
+        'NombreEjecutivo',
+        'NombreCliente',
+        'DireccionCliente'
+    ];
+
+    // Comprobamos si el campo actual está en la lista de campos bloqueados
+    if (camposBloqueados.includes(element.id)) {
+        // Obtener el texto pegado (para pegar no solo una tecla sino cualquier cosa)
+        const textoPegar = event.clipboardData.getData('text');
+
+        // Si el texto contiene coma (,) o punto y coma (;), prevenir el pegado
+        if (textoPegar.includes(',') || textoPegar.includes(';')) {
+            event.preventDefault(); // Prevenir el pegado
+        }
+    }
+}
+
+// Añadir el event listener a los campos especificados
+document.getElementById("DNI").addEventListener("keydown", bloquearCaracteres);
+document.getElementById("UsuarioOneTouch").addEventListener("keydown", bloquearCaracteres);
+document.getElementById("RUTCliente").addEventListener("keydown", bloquearCaracteres);
+document.getElementById("Movil1").addEventListener("keydown", bloquearCaracteres);
+document.getElementById("Movil2").addEventListener("keydown", bloquearCaracteres);
+document.getElementById("NumNegocio").addEventListener("keydown", bloquearCaracteres);
+document.getElementById("NombreEjecutivo").addEventListener("keydown", bloquearCaracteres);
+document.getElementById("NombreCliente").addEventListener("keydown", bloquearCaracteres);
+document.getElementById("DireccionCliente").addEventListener("keydown", bloquearCaracteres);
+
+// Añadir el event listener para el pegado de texto
+document.getElementById("DNI").addEventListener("paste", bloquearPegar);
+document.getElementById("UsuarioOneTouch").addEventListener("paste", bloquearPegar);
+document.getElementById("RUTCliente").addEventListener("paste", bloquearPegar);
+document.getElementById("Movil1").addEventListener("paste", bloquearPegar);
+document.getElementById("Movil2").addEventListener("paste", bloquearPegar);
+document.getElementById("NumNegocio").addEventListener("paste", bloquearPegar);
+document.getElementById("NombreEjecutivo").addEventListener("paste", bloquearPegar);
+document.getElementById("NombreCliente").addEventListener("paste", bloquearPegar);
+document.getElementById("DireccionCliente").addEventListener("paste", bloquearPegar);
+
+
+
+function bloquearCaracteresNoNumericos(event) {
+    const element = event.target;
+
+    // Lista de IDs de los campos donde solo se deben permitir números
+    const camposPermitidos = [
+        'DNI',
+        'NumNegocio',
+        'Movil1',
+        'Movil2'
+    ];
+
+    // Comprobamos si el campo actual está en la lista de campos permitidos
+    if (camposPermitidos.includes(element.id)) {
+        // Obtenemos el código de la tecla presionada
+        const keyCode = event.keyCode || event.which;
+
+        // Permitir solo números (48-57) y (96-105 para el teclado numérico)
+        // También permitir la tecla Backspace (keyCode 8)
+        const esNumero = (keyCode >= 48 && keyCode <= 57) || (keyCode >= 96 && keyCode <= 105);
+        const esBackspace = keyCode === 8; // Código para la tecla Backspace
+
+        // Si no es un número ni Backspace, prevenimos el evento (bloqueamos la tecla)
+        if (!esNumero && !esBackspace) {
+            event.preventDefault(); // Bloquear la tecla
+        }
+    }
+}
+
+// Añadir el event listener a los campos especificados para bloquear caracteres no numéricos
+document.getElementById("DNI").addEventListener("keydown", bloquearCaracteresNoNumericos);
+document.getElementById("NumNegocio").addEventListener("keydown", bloquearCaracteresNoNumericos);
+document.getElementById("Movil1").addEventListener("keydown", bloquearCaracteresNoNumericos);
+document.getElementById("Movil2").addEventListener("keydown", bloquearCaracteresNoNumericos);
+
+
 </script>
 </body>
 </html>
+0

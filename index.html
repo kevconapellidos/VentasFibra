@@ -1,587 +1,890 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Ventas Outbound</title>
-    <style>
-        body {
-            font-family: Barlow, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Ventas Outbound</title>
+  <style>
+    :root {
+      --bg: #eef4fb;
+      --bg-2: #f8fbff;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #dbe4ee;
+      --focus: #38bdf8;
+      --success: #10b981;
+      --success-dark: #059669;
+      --danger: #ef4444;
+      --danger-dark: #dc2626;
+      --warning: #f59e0b;
+      --shadow: 0 24px 60px rgba(15, 23, 42, 0.10);
+      --radius: 20px;
+      --radius-sm: 12px;
+      --transition: 180ms ease;
+    }
 
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 1000px;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 10px;
-        }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: Barlow, Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.10), transparent 30%),
+        radial-gradient(circle at top right, rgba(16, 185, 129, 0.10), transparent 28%),
+        linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 100%);
+    }
 
-        .form-grid {
-    		display: grid;
-    		grid-template-columns: repeat(3, 1fr);
-    		gap: 15px; /* Espaciado entre filas y columnas */
-   		 column-gap: 25px; /* Aumenta el espacio entre columnas */
-	}
+    body {
+      padding: 24px 16px 40px;
+    }
 
-        label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
-        }
+    .page {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
 
-        input, select {
-    		width: 100%;
-   		padding: 10px;
-    		border: 1px solid #ccc;
-    		border-radius: 5px;
-    		font-size: 15px; /* Unifica el tamaño del texto */
-    		height: 40px; /* Asegura una altura uniforme */
-    		box-sizing: border-box; /* Evita que el padding afecte el tamaño total */
-	}
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(219, 228, 238, 0.9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
 
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px; /* Espaciado entre los botones */
-            margin-top: 20px;
-        }
+    .card-header {
+      padding: 28px 28px 10px;
+      border-bottom: 1px solid rgba(219, 228, 238, 0.75);
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(249,251,255,0.96));
+    }
 
-        button {
-            font-family: 'Barlow', sans-serif;
-            font-size: 17px;
-            padding: 10px;
-            border: none;
-            border-radius: 7px;
-            cursor: pointer;
-            width: 150px; /* Asegura un tamaño uniforme */
-        }
+    .eyebrow {
+      margin: 0 0 6px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--success-dark);
+    }
 
-        #enviarBtn {
-    		background-color: #00EEB0;
-    		color: black;
-    		font-weight: bold;
-	}
+    h1 {
+      margin: 0;
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      line-height: 1.15;
+    }
 
-        #enviarBtn:hover {
-            background-color: #00CC97;
-        }
+    .subtitle {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
 
-        #limpiarBtn {
-            background-color: #FF0000;
-            color: white;
-        }
+    .card-body {
+      padding: 20px 28px 28px;
+    }
 
-        #limpiarBtn:hover {
-            background-color: #c82333;
-        }
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      font-size: 0.96rem;
+      font-weight: 600;
+    }
 
-        @media (max-width: 800px) {
-            .form-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+    .status::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: currentColor;
+      flex: 0 0 auto;
+    }
 
-        @media (max-width: 500px) {
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    .status.neutral {
+      color: #1d4ed8;
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
 
+    .status.success {
+      color: #065f46;
+      background: #ecfdf5;
+      border-color: #a7f3d0;
+    }
+
+    .status.error {
+      color: #991b1b;
+      background: #fef2f2;
+      border-color: #fecaca;
+    }
+
+    .status.warning {
+      color: #92400e;
+      background: #fffbeb;
+      border-color: #fde68a;
+    }
+
+    .status.loading {
+      color: #0f766e;
+      background: #f0fdfa;
+      border-color: #99f6e4;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px 22px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .field.span-3 {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .hint {
+      margin: -2px 0 0;
+      font-size: 0.80rem;
+      color: var(--muted);
+    }
+
+    input,
+    select {
+      width: 100%;
+      min-height: 46px;
+      padding: 11px 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      font-size: 0.96rem;
+      color: var(--text);
+      transition:
+        border-color var(--transition),
+        box-shadow var(--transition),
+        transform var(--transition);
+      box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.03);
+    }
+
+    input::placeholder {
+      color: #94a3b8;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--focus);
+      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.18);
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 26px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-width: 164px;
+      min-height: 48px;
+      padding: 0 18px;
+      border: none;
+      border-radius: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform var(--transition), opacity var(--transition), background-color var(--transition), box-shadow var(--transition);
+    }
+
+    button:hover:not(:disabled) {
+      transform: translateY(-1px);
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.72;
+      transform: none;
+    }
+
+    #enviarBtn {
+      background: var(--success);
+      color: #03231c;
+      box-shadow: 0 12px 24px rgba(16, 185, 129, 0.22);
+    }
+
+    #enviarBtn:hover:not(:disabled) {
+      background: var(--success-dark);
+      color: white;
+    }
+
+    #limpiarBtn {
+      background: var(--danger);
+      color: white;
+      box-shadow: 0 12px 24px rgba(239, 68, 68, 0.18);
+    }
+
+    #limpiarBtn:hover:not(:disabled) {
+      background: var(--danger-dark);
+    }
+
+    .spinner {
+      display: none;
+      width: 16px;
+      height: 16px;
+      border: 2px solid currentColor;
+      border-right-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+    }
+
+    #enviarBtn.loading .spinner {
+      display: inline-block;
+    }
+
+    .footer-note {
+      margin-top: 12px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    iframe[hidden] {
+      display: none;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 960px) {
+      .form-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 16px 12px 32px;
+      }
+
+      .card-header,
+      .card-body {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
+  <main class="page">
+    <section class="card">
+      <header class="card-header">
+        <p class="eyebrow">Ventas outbound</p>
+        <h1>Registro de Ventas</h1>
+        <p class="subtitle">Formulario optimizado para evitar erorres, por favor lee los campos antes de subir cualquier dato.</p>
+      </header>
 
-    <h2>Registro de Ventas Outbound</h2>
+      <div class="card-body">
+        <div id="status" class="status neutral" aria-live="polite">Listo para registrar una venta.</div>
 
-    <div class="container">
-        <form id="salesForm">
-            <div class="form-grid">
-                <div>
-                    <label>Fecha de Venta:</label>
-                    <input type="date" id="FechaVenta" required>
-                </div>
+        <form
+          id="salesForm"
+          action="https://script.google.com/macros/s/AKfycbwMsmE15mmKdMbDY7ffZj0Gti9vRXQZFB5lMF-iP2Teow_Z0CqZ0-lZZfubIPvUABeoAw/exec"
+          method="post"
+          target="submit_target"
+          autocomplete="off">
+          <input type="hidden" id="requestId" name="requestId">
 
-                <div>
-                    <label>DNI:</label>
-                    <input type="text" id="DNI" placeholder="Ej: 12345678" required>
-                </div>
-
-                <div>
-                    <label>Nombre Ejecutivo:</label>
-                    <input type="text" id="NombreEjecutivo" placeholder="Ej: Juan Perez" required>
-                </div>
-
-                <div>
-                    <label>Usuario OneTouch:</label>
-                    <input type="text" id="UsuarioOneTouch" placeholder="Usuario AAP_" required>
-                </div>
-
-                <div>
-                    <label>Habilidad:</label>
-                    <select id="Habilidad" required>
-			<option value="" disabled selected>Selecciona tu opción</option>
-                        <option value="FibraClientes">Fibra Clientes</option>
-                        <option value="Fibra NoClientes">Fibra No Clientes</option>
-                        <option value="Convergente">Convegente</option>
-                    </select>
-                </div>
-
-		<div>
-   		 <label>Producto:</label>
-    		<select id="Producto" required>
-    		    <option value="" disabled selected>Selecciona tu opción</option>
-   		 </select>
-		</div>
-
-    
-                <div>
-                    <label>RUT Cliente:</label>
-                    <input type="text" id="RUTCliente" placeholder="Ej: 12345678-9" required>
-                </div>
-
-           	<div>
-                    <label>Nombre Cliente:</label>
-                    <input type="text" id="NombreCliente" placeholder="Ej: Pedro Gomez">
-                </div>
-
-
-                <div>
-                    <label>Dirección Cliente:</label>
-                    <input type="text" id="DireccionCliente" placeholder="Ej: Av. Principal 1234">
-                </div>
-
-		<div>
-    			<label>Región:</label>
-    			<select id="Region" required>
-        		<option value="" disabled selected>Selecciona una región</option>
-    			</select>
-		</div>
-
-		<div>
-    			<label>Comuna:</label>
-    			<select id="Comuna" required>
-        		<option value="" disabled selected>Selecciona una comuna</option>
-    			</select>
-		</div>
-
-
- 		<div>
-   		 <label>Plan Tarifario:</label>
-   		 <select id="PlanTarifario" required>
-       		 <option value="" disabled selected>Selecciona tu opción</option>
-  		 </select>
-		</div>
-
-                <div>
-                    <label>Numero de Grabacion:</label>
-                    <input type="text" id="Movil1" placeholder="Ej: 56912345678" required>
-                </div>
-
-                <div>
-                    <label>Contacto Adicional:</label>
-                    <input type="text" id="Movil2" placeholder="Opcional">
-                </div>
-
-		<div>
-    			<label>Portabilidad:</label>
-   			 <select id="Portabilidad" required>
-        			<option value="" disabled selected>Selecciona tu opción</option>
-    			</select>
-		</div>
-
-		<div>
-    		<label>Compañía Donadora:</label>
-    		<select id="CompaniaDonadora" required>
-        		<option value="" disabled selected>Selecciona tu opción</option>
-    		</select>
-		</div>
-
-
-                <div>
-                    <label>Fecha de Instalación:</label>
-                    <input type="date" id="FechaInstalacion">
-                </div>
-
-    
-            <div>
-                    <label>Numero de Negocio:</label>
-                    <input type="text" id="NumNegocio" placeholder="Numero de negocio" required>
-                </div>
-
-
-
-
+          <div class="form-grid">
+            <div class="field">
+              <label for="FechaVenta">Fecha de Venta</label>
+              <input type="date" id="FechaVenta" name="FechaVenta" required>
             </div>
-            <div class="button-container">
-                <button type="submit" id="enviarBtn">Enviar</button>
-                <button type="button" id="limpiarBtn">Limpiar</button>
+
+            <div class="field">
+              <label for="DNI">DNI</label>
+              <input type="text" id="DNI" name="DNI" placeholder="Ej: 12345678" inputmode="numeric" maxlength="12" required>
             </div>
+
+            <div class="field">
+              <label for="NombreEjecutivo">Nombre Ejecutivo</label>
+              <input type="text" id="NombreEjecutivo" name="NombreEjecutivo" placeholder="Ej: Juan Perez" maxlength="120" required>
+            </div>
+
+            <div class="field">
+              <label for="UsuarioOneTouch">Usuario OneTouch</label>
+              <input type="text" id="UsuarioOneTouch" name="UsuarioOneTouch" placeholder="Usuario AAP_" maxlength="40" spellcheck="false" required>
+              <p class="hint">Se convierte automáticamente a mayúsculas y sin espacios.</p>
+            </div>
+
+            <div class="field">
+              <label for="Habilidad">Habilidad</label>
+              <select id="Habilidad" name="Habilidad" required>
+                <option value="" selected disabled>Selecciona tu opción</option>
+                <option value="FibraClientes">Fibra Clientes</option>
+                <option value="Fibra NoClientes">Fibra No Clientes</option>
+                <option value="Convergente">Convergente</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="Producto">Producto</label>
+              <select id="Producto" name="Producto" required></select>
+            </div>
+
+            <div class="field">
+              <label for="RUTCliente">RUT Cliente</label>
+              <input type="text" id="RUTCliente" name="RUTCliente" placeholder="Ej: 12345678-9" maxlength="20" required>
+            </div>
+
+            <div class="field">
+              <label for="NombreCliente">Nombre Cliente</label>
+              <input type="text" id="NombreCliente" name="NombreCliente" placeholder="Ej: Pedro Gomez" maxlength="140">
+            </div>
+
+            <div class="field">
+              <label for="DireccionCliente">Dirección Cliente</label>
+              <input type="text" id="DireccionCliente" name="DireccionCliente" placeholder="Ej: Av. Principal 1234" maxlength="180">
+            </div>
+
+            <div class="field">
+              <label for="Region">Región</label>
+              <select id="Region" name="Region" required></select>
+            </div>
+
+            <div class="field">
+              <label for="Comuna">Comuna</label>
+              <select id="Comuna" name="Comuna" required></select>
+            </div>
+
+            <div class="field">
+              <label for="PlanTarifario">Plan Tarifario</label>
+              <select id="PlanTarifario" name="PlanTarifario" required></select>
+            </div>
+
+            <div class="field">
+              <label for="Movil1">Número de Grabación</label>
+              <input type="text" id="Movil1" name="Movil1" placeholder="Ej: 56912345678" inputmode="numeric" maxlength="20" required>
+            </div>
+
+            <div class="field">
+              <label for="Movil2">Contacto Adicional</label>
+              <input type="text" id="Movil2" name="Movil2" placeholder="Opcional" inputmode="numeric" maxlength="20">
+            </div>
+
+            <div class="field">
+              <label for="Portabilidad">Portabilidad</label>
+              <select id="Portabilidad" name="Portabilidad" required></select>
+            </div>
+
+            <div class="field">
+              <label for="CompaniaDonadora">Compañía Donadora</label>
+              <select id="CompaniaDonadora" name="CompaniaDonadora" required></select>
+            </div>
+
+            <div class="field">
+              <label for="FechaInstalacion">Fecha de Instalación</label>
+              <input type="date" id="FechaInstalacion" name="FechaInstalacion">
+            </div>
+
+            <div class="field">
+              <label for="NumNegocio">Número de Negocio</label>
+              <input type="text" id="NumNegocio" name="NumNegocio" placeholder="Número de negocio" inputmode="numeric" maxlength="20" required>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="submit" id="enviarBtn">
+              <span class="spinner" aria-hidden="true"></span>
+              <span class="btn-text">Enviar</span>
+            </button>
+            <button type="button" id="limpiarBtn">Limpiar</button>
+          </div>
+
+          <p class="footer-note">Mientras el envío esté en proceso, el botón se bloquea para evitar registros repetidos.</p>
         </form>
+      </div>
+    </section>
+  </main>
 
-        <p id="respuesta" style="text-align: center; font-weight: bold; color: red;"></p>
-    </div>
+  <iframe name="submit_target" id="submit_target" title="Respuesta del servidor" hidden></iframe>
 
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwMsmE15mmKdMbDY7ffZj0Gti9vRXQZFB5lMF-iP2Teow_Z0CqZ0-lZZfubIPvUABeoAw/exec";
+    const GOOGLE_CALLBACK_ORIGINS = new Set([
+      "https://script.google.com",
+      "https://script.googleusercontent.com"
+    ]);
 
+    const regionesYComunas = {
+  "Metropolitana de Santiago": [
+    "Buin",
+    "Calera De Tango",
+    "Cerrillos",
+    "Cerro Navia",
+    "Colina",
+    "Conchali",
+    "El Bosque",
+    "El Monte",
+    "Estacion Central",
+    "Huechuraba",
+    "Independencia",
+    "Isla De Maipo",
+    "La Cisterna",
+    "La Florida",
+    "La Granja",
+    "La Reina",
+    "Lampa",
+    "Las Condes",
+    "Lo Barnechea",
+    "Lo Espejo",
+    "Lo Prado",
+    "Macul",
+    "Maipu",
+    "Melipilla",
+    "Nunoa",
+    "Padre Hurtado",
+    "Paine",
+    "Pedro Aguirre Cerda",
+    "Penaflor",
+    "Penalolen",
+    "Pirque",
+    "Providencia",
+    "Pudahuel",
+    "Puente Alto",
+    "Quilicura",
+    "Quinta Normal",
+    "Recoleta",
+    "Renca",
+    "San Bernardo",
+    "San Joaquin",
+    "San Jose De Maipo",
+    "San Miguel",
+    "San Ramon",
+    "Santiago",
+    "Talagante",
+    "Vitacura"
+  ],
+  "Antofagasta": [
+    "Antofagasta",
+    "Calama",
+    "San Pedro De Atacama",
+    "Tocopilla"
+  ],
+  "Arica & Parinacota": [
+    "Arica"
+  ],
+  "Atacama": [
+    "Copiapo",
+    "Vallenar"
+  ],
+  "Biobio": [
+    "Arauco",
+    "Bio Bio",
+    "Canete",
+    "Chiguayante",
+    "Chillan",
+    "Chillan Viejo",
+    "Concepcion",
+    "Coronel",
+    "Florida",
+    "Hualpen",
+    "Hualqui",
+    "Los Angeles",
+    "Niquen",
+    "Nuble",
+    "Penco",
+    "San Carlos",
+    "San Pedro De La Paz",
+    "Talcahuano",
+    "Tome"
+  ],
+  "Coquimbo": [
+    "Coquimbo",
+    "Illapel",
+    "La Serena",
+    "Los Vilos",
+    "Ovalle"
+  ],
+  "La Araucania": [
+    "Araucania",
+    "Lautaro",
+    "Padre Las Casas",
+    "Temuco",
+    "Villarrica"
+  ],
+  "Los Rios": [
+    "La Union",
+    "Los Lagos",
+    "Valdivia"
+  ],
+  "Los Lagos": [
+    "Osorno",
+    "Puerto Montt",
+    "Puerto Varas"
+  ],
+  "Libertador Bernardo O'Higgins": [
+    "Coltauco",
+    "Graneros",
+    "Machali",
+    "Mostazal",
+    "Ohiggins",
+    "Pichilemu",
+    "Rancagua",
+    "Rengo",
+    "San Fernando",
+    "Santa Cruz"
+  ],
+  "Maule": [
+    "Constitucion",
+    "Curico",
+    "Linares",
+    "Maule",
+    "Molina",
+    "Parral",
+    "San Javier",
+    "Talca"
+  ],
+  "Tarapaca": [
+    "Alto Hospicio",
+    "Iquique"
+  ],
+  "Valparaiso": [
+    "Algarrobo",
+    "Calera",
+    "Calle Larga",
+    "Casablanca",
+    "Catemu",
+    "Concon",
+    "El Tabo",
+    "Hijuelas",
+    "La Cruz",
+    "La Ligua",
+    "Limache",
+    "Llaillay",
+    "Los Andes",
+    "Nogales",
+    "Olmue",
+    "Panquehue",
+    "Papudo",
+    "Quillota",
+    "Quilpue",
+    "Quintero",
+    "Rinconada",
+    "San Antonio",
+    "San Esteban",
+    "San Felipe",
+    "Santa Maria",
+    "Santo Domingo",
+    "Valparaiso",
+    "Villa Alemana",
+    "Vina Del Mar",
+    "Zapallar"
+  ]
+};
+    const portabilidadYCompania = {
+  "Si": [
+    "Movistar",
+    "Claro",
+    "Wom",
+    "Gtd",
+    "Pacifico",
+    "Otro"
+  ],
+  "No": [
+    "-"
+  ]
+};
+    const productoYPlanes = {
+  "Fibra": [
+    "Internet 600",
+    "Internet 800",
+    "Internet 940",
+    "TVFull 600",
+    "TVFull 800",
+    "TVFull 940",
+    "TVLite 600",
+    "TVLite 800",
+    "TVLite 940",
+    "TrioFull 600",
+    "TrioFull 800",
+    "TrioFull 940",
+    "TrioLite 600",
+    "TrioLite 800",
+    "TrioLite 940"
+  ],
+  "Movil": [
+    "Portabilidad",
+    "Linea Nueva",
+    "Linea Adicional",
+    "Migracion"
+  ]
+};
 
-<script>
-    document.getElementById("salesForm").addEventListener("submit", function(event) {
-        event.preventDefault();
+    const form = document.getElementById("salesForm");
+    const statusBox = document.getElementById("status");
+    const submitBtn = document.getElementById("enviarBtn");
+    const submitBtnText = submitBtn.querySelector(".btn-text");
+    const clearBtn = document.getElementById("limpiarBtn");
+    const requestIdInput = document.getElementById("requestId");
 
-        var data = {
-            FechaVenta: document.getElementById("FechaVenta").value,
-            DNI: document.getElementById("DNI").value,
-            NombreEjecutivo: document.getElementById("NombreEjecutivo").value,
-            UsuarioOneTouch: document.getElementById("UsuarioOneTouch").value,
-            RUTCliente: document.getElementById("RUTCliente").value,
-            NumNegocio: document.getElementById("NumNegocio").value,
-            Movil1: document.getElementById("Movil1").value,
-            Movil2: document.getElementById("Movil2").value,
-            Habilidad: document.getElementById("Habilidad").value,
-            Producto: document.getElementById("Producto").value,
-            PlanTarifario: document.getElementById("PlanTarifario").value,
-            Comuna: document.getElementById("Comuna").value,
-            Region: document.getElementById("Region").value,
-            NombreCliente: document.getElementById("NombreCliente").value,
-            DireccionCliente: document.getElementById("DireccionCliente").value,
-            Portabilidad: document.getElementById("Portabilidad").value,
-            CompaniaDonadora: document.getElementById("CompaniaDonadora").value,
-            FechaInstalacion: document.getElementById("FechaInstalacion").value
-        };
+    const regionSelect = document.getElementById("Region");
+    const comunaSelect = document.getElementById("Comuna");
+    const portabilidadSelect = document.getElementById("Portabilidad");
+    const companiaDonadoraSelect = document.getElementById("CompaniaDonadora");
+    const productoSelect = document.getElementById("Producto");
+    const planTarifarioSelect = document.getElementById("PlanTarifario");
 
-        let scriptURL = "https://script.google.com/macros/s/AKfycbwMsmE15mmKdMbDY7ffZj0Gti9vRXQZFB5lMF-iP2Teow_Z0CqZ0-lZZfubIPvUABeoAw/exec"; // Reemplaza con tu enlace de Google Apps Script
+    let isSubmitting = false;
+    let activeRequestId = "";
+    let submitTimer = null;
 
-        fetch(scriptURL, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-        })
-        .then(() => {
-            document.getElementById("respuesta").innerText = "Datos enviados con éxito";
-            document.getElementById("salesForm").reset();
-        })
-        .catch(error => {
-            document.getElementById("respuesta").innerText = "Error al enviar los datos";
+    function setStatus(type, message) {
+      statusBox.className = `status ${type}`;
+      statusBox.textContent = message;
+    }
+
+    function setSubmittingState(loading) {
+      isSubmitting = loading;
+      submitBtn.disabled = loading;
+      clearBtn.disabled = loading;
+      submitBtn.classList.toggle("loading", loading);
+      submitBtnText.textContent = loading ? "Enviando..." : "Enviar";
+    }
+
+    function generateRequestId() {
+      if (window.crypto && typeof window.crypto.randomUUID === "function") {
+        return window.crypto.randomUUID();
+      }
+      return `req-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+    }
+
+    function populateSelect(selectElement, values, placeholder) {
+      selectElement.innerHTML = "";
+      const placeholderOption = document.createElement("option");
+      placeholderOption.value = "";
+      placeholderOption.textContent = placeholder;
+      placeholderOption.disabled = true;
+      placeholderOption.selected = true;
+      selectElement.appendChild(placeholderOption);
+
+      values.forEach((value) => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value;
+        selectElement.appendChild(option);
+      });
+    }
+
+    function initSelects() {
+      populateSelect(regionSelect, Object.keys(regionesYComunas), "Selecciona una región");
+      populateSelect(comunaSelect, [], "Selecciona una comuna");
+      populateSelect(portabilidadSelect, Object.keys(portabilidadYCompania), "Selecciona tu opción");
+      populateSelect(companiaDonadoraSelect, [], "Selecciona tu opción");
+      populateSelect(productoSelect, Object.keys(productoYPlanes), "Selecciona tu opción");
+      populateSelect(planTarifarioSelect, [], "Selecciona tu opción");
+    }
+
+    function resetDependentSelects() {
+      populateSelect(comunaSelect, [], "Selecciona una comuna");
+      populateSelect(companiaDonadoraSelect, [], "Selecciona tu opción");
+      populateSelect(planTarifarioSelect, [], "Selecciona tu opción");
+    }
+
+    function normalizeSpaces(value) {
+      return value.replace(/\s+/g, " ").trim();
+    }
+
+    function sanitizeById(id, value) {
+      let result = value ?? "";
+      const numericOnly = new Set(["DNI", "NumNegocio", "Movil1", "Movil2"]);
+      const noSpaces = new Set(["DNI", "UsuarioOneTouch", "RUTCliente", "Movil1", "Movil2", "NumNegocio"]);
+      const noCommaSemicolon = new Set([
+        "DNI",
+        "UsuarioOneTouch",
+        "RUTCliente",
+        "Movil1",
+        "Movil2",
+        "NumNegocio",
+        "NombreEjecutivo",
+        "NombreCliente",
+        "DireccionCliente"
+      ]);
+
+      if (numericOnly.has(id)) {
+        result = result.replace(/\D+/g, "");
+      }
+
+      if (noSpaces.has(id)) {
+        result = result.replace(/\s+/g, "");
+      }
+
+      if (noCommaSemicolon.has(id)) {
+        result = result.replace(/[;,]/g, "");
+      }
+
+      if (id === "UsuarioOneTouch" || id === "RUTCliente") {
+        result = result.toUpperCase();
+      }
+
+      if (id === "NombreEjecutivo" || id === "NombreCliente" || id === "DireccionCliente") {
+        result = normalizeSpaces(result);
+      }
+
+      return result;
+    }
+
+    function bindSanitizers() {
+      form.querySelectorAll("input[type='text']").forEach((input) => {
+        input.addEventListener("input", () => {
+          input.value = sanitizeById(input.id, input.value);
         });
-    });
-	document.getElementById("limpiarBtn").addEventListener("click", function() {
-        document.getElementById("salesForm").reset();
-        document.getElementById("respuesta").innerText = "¡Campos Limpios!";
-        setTimeout(() => { document.getElementById("respuesta").innerText = ""; }, 3000);
-    });
-
-
-// Regiones y comunas de Chile
-const regionesYComunas = {
-
-    "Metropolitana de Santiago": ["Buin", "Calera De Tango", "Cerrillos", "Cerro Navia", "Colina", "Conchali", "El Bosque", "El Monte", "Estacion Central", 	"Huechuraba", "Independencia", "Isla De Maipo", "La Cisterna", "La Florida", "La Granja", "La Reina", "Lampa", "Las Condes", "Lo Barnechea", "Lo Espejo", "Lo 	Prado", "Macul", "Maipu", "Melipilla", "Nunoa", "Padre Hurtado", "Paine", "Pedro Aguirre Cerda", "Penaflor", "Penalolen", "Pirque", "Providencia", 	"Pudahuel", "Puente Alto", "Quilicura", "Quinta Normal", "Recoleta", "Renca", "San Bernardo", "San Joaquin", "San Jose De Maipo", "San Miguel", "San Ramon", 	"Santiago", "Talagante", "Vitacura"],
-
-    "Antofagasta": ["Antofagasta", "Calama", "San Pedro De Atacama", "Tocopilla"],
-    "Arica & Parinacota": ["Arica"],
-    "Atacama": ["Copiapo", "Vallenar"],
-    "Biobio": ["Arauco", "Bio Bio", "Canete", "Chiguayante", "Chillan", "Chillan Viejo", "Concepcion", "Coronel", "Florida", "Hualpen", "Hualqui", "Los Angeles", 	"Niquen", "Nuble", "Penco", "San Carlos", "San Pedro De La Paz", "Talcahuano", "Tome"],
-    "Coquimbo": ["Coquimbo", "Illapel", "La Serena", "Los Vilos", "Ovalle"],
-    "La Araucania": ["Araucania", "Lautaro", "Padre Las Casas", "Temuco", "Villarrica"],
-    "Los Rios": ["La Union", "Los Lagos", "Valdivia"],
-    "Los Lagos": ["Osorno", "Puerto Montt", "Puerto Varas"],
-    "Libertador Bernardo O'Higgins": ["Coltauco", "Graneros", "Machali", "Mostazal", "Ohiggins", "Pichilemu", "Rancagua", "Rengo", "San Fernando", "Santa Cruz"],
-    "Maule": ["Constitucion", "Curico", "Linares", "Maule", "Molina", "Parral", "San Javier", "Talca"],
-    "Tarapaca": ["Alto Hospicio", "Iquique"],
-    "Valparaiso": ["Algarrobo", "Calera", "Calle Larga", "Casablanca", "Catemu", "Concon", "El Tabo", "Hijuelas", "La Cruz", "La Ligua", "Limache", "Llaillay", "Los 	Andes", "Nogales", "Olmue", "Panquehue", "Papudo", "Quillota", "Quilpue", "Quintero", "Rinconada", "San Antonio", "San Esteban", "San Felipe", "Santa Maria", 	"Santo Domingo", "Valparaiso", "Villa Alemana", "Vina Del Mar", "Zapallar"]
-
-};
-
-// Llenar el select de regiones
-const regionSelect = document.getElementById("Region");
-const comunaSelect = document.getElementById("Comuna");
-
-for (let region in regionesYComunas) {
-    const option = document.createElement("option");
-    option.value = region;
-    option.text = region;
-    regionSelect.appendChild(option);
-}
-
-// Actualizar comunas según la región seleccionada
-regionSelect.addEventListener("change", function () {
-    const comunas = regionesYComunas[this.value] || [];
-    comunaSelect.innerHTML = '<option value="" disabled selected>Selecciona una comuna</option>'; // Reset
-
-    comunas.forEach(comuna => {
-        const option = document.createElement("option");
-        option.value = comuna;
-        option.text = comuna;
-        comunaSelect.appendChild(option);
-    });
-});
-
-
-// Opciones de Portabilidad y Compañía Donadora
-const portabilidadYCompania = {
-    "Si": ["Movistar", "Claro", "Wom", "Gtd", "Pacifico", "Otro"],
-    "No": ["-"]
-};
-
-// Llenar el select de Portabilidad
-const portabilidadSelect = document.getElementById("Portabilidad");
-const companiaDonadoraSelect = document.getElementById("CompaniaDonadora");
-
-for (let portabilidad in portabilidadYCompania) {
-    const option = document.createElement("option");
-    option.value = portabilidad;
-    option.text = portabilidad;
-    portabilidadSelect.appendChild(option);
-}
-
-// Actualizar el select de Compañía Donadora según la opción de Portabilidad
-portabilidadSelect.addEventListener("change", function () {
-    const companias = portabilidadYCompania[this.value] || [];
-    companiaDonadoraSelect.innerHTML = '<option value="" disabled selected>Selecciona tu opción</option>'; // Reset
-
-    companias.forEach(compania => {
-        const option = document.createElement("option");
-        option.value = compania;
-        option.text = compania;
-        companiaDonadoraSelect.appendChild(option);
-    });
-});
-
-
-// Opciones de Producto y sus Planes Tarifarios correspondientes
-const productoYPlanes = {
-    "Fibra": [
-        "Internet 600", "Internet 800", "Internet 940",
-        "TVFull 600", "TVFull 800", "TVFull 940",
-        "TVLite 600", "TVLite 800", "TVLite 940",
-        "TrioFull 600", "TrioFull 800", "TrioFull 940",
-        "TrioLite 600", "TrioLite 800", "TrioLite 940"
-    ],
-    "Movil": ["Portabilidad","Linea Nueva","Linea Adicional","Migracion"]
-};
-
-// Obtener los selectores
-const productoSelect = document.getElementById("Producto");
-const planTarifarioSelect = document.getElementById("PlanTarifario");
-
-// Llenar el select de Producto
-for (let producto in productoYPlanes) {
-    const option = document.createElement("option");
-    option.value = producto;
-    option.text = producto;
-    productoSelect.appendChild(option);
-}
-
-// Actualizar el select de Plan Tarifario según la opción de Producto
-productoSelect.addEventListener("change", function () {
-    const planes = productoYPlanes[this.value] || [];
-    planTarifarioSelect.innerHTML = '<option value="" disabled selected>Selecciona tu opción</option>'; // Reset
-
-    planes.forEach(plan => {
-        const option = document.createElement("option");
-        option.value = plan;
-        option.text = plan;
-        planTarifarioSelect.appendChild(option);
-    });
-});
-
-
-function bloquearEspacio(event) {
-    // Obtenemos el elemento actual
-    const element = event.target;
-
-    // Lista de IDs de los campos donde se debe bloquear la barra espaciadora
-    const camposBloqueados = [
-        'DNI',
-        'UsuarioOneTouch',
-        'RUTCliente',
-        'Movil1',
-        'Movil2',
-        'NumNegocio'
-    ];
-
-    // Si el campo actual está en la lista de campos bloqueados
-    if (camposBloqueados.includes(element.id)) {
-        // Si la tecla presionada es la barra espaciadora (código de la barra espaciadora es 32)
-        if (event.keyCode === 32) {
-            event.preventDefault(); // Prevenir el espacio
-        }
+      });
     }
-}
 
-// Función para bloquear el pegado de espacio
-function bloquearPegarEspacio(event) {
-    const element = event.target;
+    function bindDependentSelects() {
+      regionSelect.addEventListener("change", function() {
+        const comunas = regionesYComunas[this.value] || [];
+        populateSelect(comunaSelect, comunas, "Selecciona una comuna");
+      });
 
-    // Lista de IDs de los campos donde se debe bloquear el espacio en el pegado
-    const camposBloqueados = [
-        'DNI',
-        'UsuarioOneTouch',
-        'RUTCliente',
-        'Movil1',
-        'Movil2',
-        'NumNegocio'
-    ];
+      portabilidadSelect.addEventListener("change", function() {
+        const companias = portabilidadYCompania[this.value] || [];
+        populateSelect(companiaDonadoraSelect, companias, "Selecciona tu opción");
+      });
 
-    // Comprobamos si el campo actual está en la lista de campos bloqueados
-    if (camposBloqueados.includes(element.id)) {
-        // Obtener el texto pegado (para pegar no solo una tecla sino cualquier cosa)
-        const textoPegar = event.clipboardData.getData('text');
-
-        // Si el texto contiene un espacio, prevenir el pegado
-        if (textoPegar.includes(' ')) {
-            event.preventDefault(); // Prevenir el pegado de espacio
-        }
+      productoSelect.addEventListener("change", function() {
+        const planes = productoYPlanes[this.value] || [];
+        populateSelect(planTarifarioSelect, planes, "Selecciona tu opción");
+      });
     }
-}
 
-// Añadir el event listener para la tecla de espacio en los campos especificados
-document.getElementById("DNI").addEventListener("keydown", bloquearEspacio);
-document.getElementById("UsuarioOneTouch").addEventListener("keydown", bloquearEspacio);
-document.getElementById("RUTCliente").addEventListener("keydown", bloquearEspacio);
-document.getElementById("Movil1").addEventListener("keydown", bloquearEspacio);
-document.getElementById("Movil2").addEventListener("keydown", bloquearEspacio);
-document.getElementById("NumNegocio").addEventListener("keydown", bloquearEspacio);
-
-// Añadir el event listener para el pegado de texto (paste) en los campos especificados
-document.getElementById("DNI").addEventListener("paste", bloquearPegarEspacio);
-document.getElementById("UsuarioOneTouch").addEventListener("paste", bloquearPegarEspacio);
-document.getElementById("RUTCliente").addEventListener("paste", bloquearPegarEspacio);
-document.getElementById("Movil1").addEventListener("paste", bloquearPegarEspacio);
-document.getElementById("Movil2").addEventListener("paste", bloquearPegarEspacio);
-document.getElementById("NumNegocio").addEventListener("paste", bloquearPegarEspacio);
-
-
-
-function bloquearCaracteres(event) {
-    const element = event.target;
-
-    // Lista de IDs de los campos donde se debe bloquear la barra espaciadora, coma y punto y coma
-    const camposBloqueados = [
-        'DNI',
-        'UsuarioOneTouch',
-        'RUTCliente',
-        'Movil1',
-        'Movil2',
-        'NumNegocio',
-        'NombreEjecutivo',
-        'NombreCliente',
-        'DireccionCliente'
-    ];
-
-    // Comprobamos si el campo actual está en la lista de campos bloqueados
-    if (camposBloqueados.includes(element.id)) {
-        // Bloquear la tecla de la coma (,) y el punto y coma (;)
-        if (event.keyCode === 188 || event.keyCode === 186) {
-            event.preventDefault(); // Prevenir la acción predeterminada
-        }
+    function normalizeFormValues() {
+      form.querySelectorAll("input[type='text']").forEach((input) => {
+        input.value = sanitizeById(input.id, input.value);
+      });
     }
-}
 
-// Función para bloquear el pegado de coma y punto y coma
-function bloquearPegar(event) {
-    const element = event.target;
+    function handleServerMessage(event) {
+      if (!GOOGLE_CALLBACK_ORIGINS.has(event.origin)) {
+        return;
+      }
 
-    // Lista de IDs de los campos donde se debe bloquear la coma y punto y coma en el pegado
-    const camposBloqueados = [
-        'DNI',
-        'UsuarioOneTouch',
-        'RUTCliente',
-        'Movil1',
-        'Movil2',
-        'NumNegocio',
-        'NombreEjecutivo',
-        'NombreCliente',
-        'DireccionCliente'
-    ];
+      const payload = event.data || {};
+      if (payload.source !== "ventasfibra") {
+        return;
+      }
 
-    // Comprobamos si el campo actual está en la lista de campos bloqueados
-    if (camposBloqueados.includes(element.id)) {
-        // Obtener el texto pegado (para pegar no solo una tecla sino cualquier cosa)
-        const textoPegar = event.clipboardData.getData('text');
+      if (activeRequestId && payload.requestId && payload.requestId !== activeRequestId) {
+        return;
+      }
 
-        // Si el texto contiene coma (,) o punto y coma (;), prevenir el pegado
-        if (textoPegar.includes(',') || textoPegar.includes(';')) {
-            event.preventDefault(); // Prevenir el pegado
-        }
+      window.clearTimeout(submitTimer);
+      submitTimer = null;
+      setSubmittingState(false);
+
+      if (payload.status === "success") {
+        setStatus("success", payload.message || "Venta registrada correctamente.");
+        form.reset();
+        resetDependentSelects();
+        activeRequestId = "";
+        requestIdInput.value = "";
+        return;
+      }
+
+      if (payload.status === "duplicate") {
+        setStatus("warning", payload.message || "Este envío ya fue recibido y no se duplicó.");
+        form.reset();
+        resetDependentSelects();
+        activeRequestId = "";
+        requestIdInput.value = "";
+        return;
+      }
+
+      setStatus("error", payload.message || "Ocurrió un error al registrar la venta.");
+      activeRequestId = "";
+      requestIdInput.value = "";
     }
-}
 
-// Añadir el event listener a los campos especificados
-document.getElementById("DNI").addEventListener("keydown", bloquearCaracteres);
-document.getElementById("UsuarioOneTouch").addEventListener("keydown", bloquearCaracteres);
-document.getElementById("RUTCliente").addEventListener("keydown", bloquearCaracteres);
-document.getElementById("Movil1").addEventListener("keydown", bloquearCaracteres);
-document.getElementById("Movil2").addEventListener("keydown", bloquearCaracteres);
-document.getElementById("NumNegocio").addEventListener("keydown", bloquearCaracteres);
-document.getElementById("NombreEjecutivo").addEventListener("keydown", bloquearCaracteres);
-document.getElementById("NombreCliente").addEventListener("keydown", bloquearCaracteres);
-document.getElementById("DireccionCliente").addEventListener("keydown", bloquearCaracteres);
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
 
-// Añadir el event listener para el pegado de texto
-document.getElementById("DNI").addEventListener("paste", bloquearPegar);
-document.getElementById("UsuarioOneTouch").addEventListener("paste", bloquearPegar);
-document.getElementById("RUTCliente").addEventListener("paste", bloquearPegar);
-document.getElementById("Movil1").addEventListener("paste", bloquearPegar);
-document.getElementById("Movil2").addEventListener("paste", bloquearPegar);
-document.getElementById("NumNegocio").addEventListener("paste", bloquearPegar);
-document.getElementById("NombreEjecutivo").addEventListener("paste", bloquearPegar);
-document.getElementById("NombreCliente").addEventListener("paste", bloquearPegar);
-document.getElementById("DireccionCliente").addEventListener("paste", bloquearPegar);
+      if (isSubmitting) {
+        return;
+      }
 
+      normalizeFormValues();
 
+      if (!form.reportValidity()) {
+        setStatus("error", "Revisa los campos obligatorios antes de enviar.");
+        return;
+      }
 
-function bloquearCaracteresNoNumericos(event) {
-    const element = event.target;
+      activeRequestId = generateRequestId();
+      requestIdInput.value = activeRequestId;
 
-    // Lista de IDs de los campos donde solo se deben permitir números
-    const camposPermitidos = [
-        'DNI',
-        'NumNegocio',
-        'Movil1',
-        'Movil2'
-    ];
+      setSubmittingState(true);
+      setStatus("loading", "Enviando registro. No presiones el botón otra vez.");
 
-    // Comprobamos si el campo actual está en la lista de campos permitidos
-    if (camposPermitidos.includes(element.id)) {
-        // Obtenemos el código de la tecla presionada
-        const keyCode = event.keyCode || event.which;
+      window.clearTimeout(submitTimer);
+      submitTimer = window.setTimeout(() => {
+        setSubmittingState(false);
+        setStatus("warning", "El servidor todavía no confirmó la recepción. Revisa la hoja antes de reenviar para evitar duplicados.");
+      }, 25000);
 
-        // Permitir solo números (48-57) y (96-105 para el teclado numérico)
-        // También permitir la tecla Backspace (keyCode 8)
-        const esNumero = (keyCode >= 48 && keyCode <= 57) || (keyCode >= 96 && keyCode <= 105);
-        const esBackspace = keyCode === 8; // Código para la tecla Backspace
+      form.action = SCRIPT_URL;
+      form.submit();
+    });
 
-        // Si no es un número ni Backspace, prevenimos el evento (bloqueamos la tecla)
-        if (!esNumero && !esBackspace) {
-            event.preventDefault(); // Bloquear la tecla
-        }
-    }
-}
+    clearBtn.addEventListener("click", function() {
+      if (isSubmitting) {
+        return;
+      }
+      form.reset();
+      resetDependentSelects();
+      requestIdInput.value = "";
+      activeRequestId = "";
+      setStatus("neutral", "Formulario limpio. Listo para un nuevo registro.");
+    });
 
-// Añadir el event listener a los campos especificados para bloquear caracteres no numéricos
-document.getElementById("DNI").addEventListener("keydown", bloquearCaracteresNoNumericos);
-document.getElementById("NumNegocio").addEventListener("keydown", bloquearCaracteresNoNumericos);
-document.getElementById("Movil1").addEventListener("keydown", bloquearCaracteresNoNumericos);
-document.getElementById("Movil2").addEventListener("keydown", bloquearCaracteresNoNumericos);
+    window.addEventListener("message", handleServerMessage);
 
-
-</script>
+    initSelects();
+    bindSanitizers();
+    bindDependentSelects();
+  </script>
 </body>
 </html>
-0
+
